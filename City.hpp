@@ -9,7 +9,7 @@ namespace pandemic {
             int pandemic_level;
             Color color;
             bool research_station;
-            // neighbors - map/vector
+            // neighbors - map / vector ?
                 // map<City n, Color c>
         public:
             City_info() {}
@@ -69,5 +69,6 @@ namespace pandemic {
         Tehran,
         Tokyo,
         Washington
+        // ,        Last // for iteraiting
 	};
 }

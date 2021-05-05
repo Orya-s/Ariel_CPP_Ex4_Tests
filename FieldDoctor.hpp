@@ -1,6 +1,4 @@
 #pragma once
-#ifndef FD
-#define FD
 #include "Player.hpp"
 
 namespace pandemic {
@@ -9,10 +7,10 @@ namespace pandemic {
     {  // can treat a neighbor city , without throwing the city's card
      
         public:
-            using Player::Player;
+            FieldDoctor(Board& b, City c) : Player::Player(b, c) {}
             FieldDoctor &treat(City city);
             std::string role();
 
     };
 }
-#endif // !FD
+

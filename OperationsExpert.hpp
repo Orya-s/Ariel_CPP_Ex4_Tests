@@ -1,6 +1,4 @@
 #pragma once
-#ifndef OE
-#define OE
 #include "Player.hpp"
 
 namespace pandemic {
@@ -9,10 +7,10 @@ namespace pandemic {
     {  // can build in every city he's in , no need for the city's card
      
         public:
-            using Player::Player;
+            OperationsExpert(Board& b, City c) : Player::Player(b, c) {}
             OperationsExpert &build();
             std::string role();
 
     };
 }
-#endif // !OE
+

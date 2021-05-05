@@ -8,7 +8,7 @@ namespace pandemic {
     {
         private:
             // int cures_found; ?
-            // cities
+            // cities   // map<City, City_info> cities ?
             int temp; // for [] operator
 
         public:

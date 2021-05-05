@@ -1,18 +1,16 @@
 #pragma once
-#ifndef GS
-#define GS
 #include "Player.hpp"
 
 namespace pandemic {
 
     class GeneSplicer : public Player
-    {  // can discover a cure from every city , doesn't need to ba in a research station
+    {  // can discover a cure with any 5 cards , doesn't have to be the same color
      
         public:
-            using Player::Player;
+            GeneSplicer(Board& b, City c) : Player::Player(b, c) {}
             GeneSplicer &discover_cure(Color);
             std::string role();
 
     };
 }
-#endif // !GS
+

@@ -1,6 +1,4 @@
 #pragma once
-#ifndef VIROLOGIST
-#define VIROLOGIST
 #include "Player.hpp"
 
 namespace pandemic {
@@ -9,10 +7,9 @@ namespace pandemic {
     {  // can treat any city if trows it's card - even when not there
      
         public:
-            using Player::Player;
+            Virologist(Board& b, City c) : Player::Player(b, c) {}
             Virologist &treat(City city);
             std::string role();
 
     };
 }
-#endif // !VIROLOGIST

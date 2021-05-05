@@ -1,6 +1,4 @@
 #pragma once
-#ifndef RESEARCHER
-#define RESEARCHER
 #include "Player.hpp"
 
 namespace pandemic {
@@ -9,10 +7,10 @@ namespace pandemic {
     {  // can discover a cure from every city , doesn't need to ba in a research station
      
         public:
-            using Player::Player;
+            Researcher(Board& b, City c) : Player::Player(b, c) {}
             Researcher &discover_cure(Color);
             std::string role();
 
     };
 }
-#endif // !RESEARCHER
+
