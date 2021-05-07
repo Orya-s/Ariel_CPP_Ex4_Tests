@@ -4,6 +4,8 @@
 #include "Board.hpp"
 #include <string>
 #include <vector>
+#include <iostream>
+#include <sstream>
 
 namespace pandemic {
 
@@ -27,5 +29,6 @@ namespace pandemic {
             virtual Player& treat(City city) ;
             virtual std::string role() ;
             virtual Player& take_card(City city) ;
+            virtual void remove_cards();
     };
 }
