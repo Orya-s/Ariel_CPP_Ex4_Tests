@@ -1,24 +1,30 @@
 #pragma once
 #include "City.hpp"
 #include <iostream>
+#include <vector>
+#include <map>
 
 namespace pandemic {
 
     class Board
     {
         private:
-            // int cures_found; ?
-            // cities   // map<City, City_info> cities ?
+            std::vector<City> found_cure; // vector<City> where cures_found
+            std::map<City, City_info> cities; // cities   // map<City, City_info> cities ?
             int temp; // for [] operator
 
         public:
-            Board() {}
+            Board() 
+            {
+                init_game();
+            }
             ~Board() {}
 
-        int& operator[] (City s) ;  
-        bool is_clean() ;
-        void remove_cures() ;  
-        friend std::ostream& operator<< (std::ostream& output, const Board& board);
+            
+            int& operator[] (City s) ;  
+            bool is_clean() ;
+            void remove_cures() ;  
+            friend std::ostream& operator<< (std::ostream& output, const Board& board);
     };
 
 }    

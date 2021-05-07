@@ -209,4 +209,8 @@ TEST_CASE("Medic tests , build tests") // when treating a pandemic removes all c
     
     CHECK_NOTHROW(otherPlayer.treat(City::London));
     CHECK_FALSE(board[City::London] == 0);  // not a Medic , reomves only one cube
+
+
+    // build tests
+    
 }

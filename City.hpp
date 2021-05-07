@@ -1,5 +1,8 @@
 #pragma once
 #include "Color.hpp"
+#include <vector>
+#include <string>
+
 
 namespace pandemic {
 
@@ -7,11 +10,14 @@ namespace pandemic {
     {
         private:
             int pandemic_level;
-            Color color;
+            // Color color;
             bool research_station;
-            // neighbors - map / vector ?
-                // map<City n, Color c>
+            // std::vector<std::string> neighbors;     // neighbors - map / vector ?
+                
         public:
+            Color color;  // public because doesn't change between games
+            std::vector<std::string> neighbors;
+        
             City_info() {}
             ~City_info() {}
 
