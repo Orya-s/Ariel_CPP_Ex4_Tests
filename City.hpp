@@ -74,14 +74,18 @@ namespace pandemic {
             City_info(Color c, std::vector<City> n) : color(c) , neighbors(n) {}
             ~City_info() {}
 
-            void set_cubes(int n)
+            // void set_cubes(int n)
+            // {
+            //     pandemic_level = n;
+            // }
+            int& get_cubes()
             {
-                pandemic_level = n;
+                return pandemic_level;
             }
-            int& operator[] (int cubes) 
-            {
-                return pandemic_level=cubes;
-            }
+            // int& operator[] (int cubes) 
+            // {
+            //     return pandemic_level=cubes;
+            // }
             bool& has_station()
             {
                 return research_station;
@@ -89,6 +93,10 @@ namespace pandemic {
             void build_station()
             {
                 research_station = true;
+            }
+            void remove_sataion()
+            {
+                research_station = false;
             }
 
     };

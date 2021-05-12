@@ -1,4 +1,5 @@
 #include "Board.hpp"
+#include <algorithm>
 
 using namespace std;
 
@@ -14,34 +15,77 @@ namespace pandemic {
     // }
     
 
-    int& Board::operator[] (City s) 
+    int& Board::operator[] (City city) 
     {
-        int ans = 0;
-        return temp;
+        return cities.at(city).get_cubes();
     }
 
     bool Board::is_clean() 
     {
-        return false;
+        for (auto &i : cities)
+        {
+            if (i.second.get_cubes() != 0)
+            {
+                return false;
+            }
+        }
+        return true;
     }
 
     void Board::remove_cures() 
     {
-
+        found_cure.clear();
     }
 
     void Board::remove_stations()
     {
-
+        for (auto &i : cities)
+        {
+            if (i.second.has_station())
+            {
+                i.second.remove_sataion();
+            }
+        }
     }
 
     void Board::add_cure(Color c)
     {
-
+        found_cure.push_back(c);
     }
+
+    bool Board::is_cured(Color c)
+    {
+        return count(found_cure.begin(), found_cure.end(), c);
+    }
+
 
     std::ostream& operator<< (std::ostream& output, const Board& board)
     {
+        output << "Cures discoverd so far: ";
+
+        for (vector<Color>::const_iterator ii = board.found_cure.begin(); ii != board.found_cure.end(); ++ii)
+        {
+            if (*ii == Color::Black)
+            {
+                output << "Black";
+            }
+            else if (*ii == Color::Blue)
+            {
+                output << "Blue";    
+            }
+            else if (*ii == Color::Red)
+            {
+                output << "Red"; 
+            }
+            else
+            {
+                output << "Yellow"; 
+            }
+        }
+        output << "\n";
+
+        // printing cubes and station for each city
+    
         return output;
     }
 

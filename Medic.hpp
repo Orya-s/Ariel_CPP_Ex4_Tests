@@ -12,6 +12,7 @@ namespace pandemic {
             using Player::Player;
             Medic &treat(City city);
             std::string role();
+            void enter_city(City city);
 
     };
 }

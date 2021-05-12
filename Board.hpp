@@ -11,7 +11,7 @@ namespace pandemic {
         private:
             std::vector<Color> found_cure;  // by color!!
             // std::map<City, City_info> cities; // cities   // map<City, City_info> cities ?
-            int temp; // for [] operator
+            
             void init();
 
         public:
@@ -23,11 +23,12 @@ namespace pandemic {
             }
             ~Board() {}
 
-            int& operator[] (City s) ;  
+            int& operator[] (City city) ;  
             bool is_clean() ;
             void remove_cures() ;  
             void remove_stations() ;
             void add_cure(Color c);
+            bool is_cured(Color c);
             friend std::ostream& operator<< (std::ostream& output, const Board& board);
     };
 

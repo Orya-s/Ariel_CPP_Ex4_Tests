@@ -6,12 +6,12 @@ namespace pandemic {
 
     OperationsExpert &OperationsExpert::build() 
     {
+        board.cities.at(location).build_station();
         return *this;
     }
 
     string OperationsExpert::role() 
     {
-        return "";
+        return "OperationsExpert";
     }
-
 }

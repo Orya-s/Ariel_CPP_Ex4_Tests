@@ -18,12 +18,17 @@ namespace pandemic {
             throw invalid_argument("Illegal action: this is not a neighbor city");
         }
 
+        enter_city(neighbor);
         return *this;
     }
 
 
     Player& Player::fly_direct(City city) 
     {
+        if (city == location)
+        {
+            throw invalid_argument("Illegal action: you can't fly to your location");
+        }
         if (count(cards.begin(), cards.end(), city))
         {
             location = city;
@@ -34,12 +39,17 @@ namespace pandemic {
             throw invalid_argument("Illegal action: you don't have this city's card");
         }
         
+        enter_city(city);
         return *this;
     }
 
 
     Player& Player::fly_charter(City city) 
     {
+        if (city == location)
+        {
+            throw invalid_argument("Illegal action: you can't fly to your location");
+        }
         if (count(cards.begin(), cards.end(), location))
         {
             remove(cards.begin(), cards.end(), location);
@@ -50,12 +60,17 @@ namespace pandemic {
             throw invalid_argument("Illegal action: you don't have the card of your location");
         }
 
+        enter_city(city);
         return *this;
     }
 
 
     Player& Player::fly_shuttle(City city) 
     {
+        if (city == location)
+        {
+            throw invalid_argument("Illegal action: you can't fly to your location");
+        }
         if (board.cities.at(location).has_station())
         {
             if (board.cities.at(city).has_station())
@@ -72,13 +87,18 @@ namespace pandemic {
             throw invalid_argument("Illegal action: Your location doesn't have a research station");
         }
         
+        enter_city(city);
         return *this;
     }
 
 
     Player& Player::build(City city) 
     {
-        if (count(cards.begin(), cards.end(), location))
+        if (location == city && board.cities.at(city).has_station())
+        {
+            return *this;
+        }
+        if (location == city && count(cards.begin(), cards.end(), location))
         {
             remove(cards.begin(), cards.end(), location);
             board.cities.at(location).build_station();
@@ -94,6 +114,11 @@ namespace pandemic {
 
     Player& Player::discover_cure(Color color) 
     {
+        if (board.is_cured(color))
+        {
+            return *this;
+        }
+        
         if (board.cities.at(location).has_station())
         {
             int counter = 0;
@@ -114,8 +139,11 @@ namespace pandemic {
                 {
                     if (counter != 0)
                     {
-                        remove(cards.begin(), cards.end(), it);
-                        counter--;
+                        if (board.cities.at(it).color == color)
+                        {
+                            remove(cards.begin(), cards.end(), it);
+                            counter--;
+                        }
                     }
                 }
             }
@@ -134,6 +162,24 @@ namespace pandemic {
 
     Player& Player::treat(City city) 
     {
+        if (board[city] == 0)  // no disease cubes
+        {
+            throw invalid_argument("Illegal action: Your location doesn't have any disease cubes");
+        }
+        if (city != location)
+        {
+            throw invalid_argument("Illegal action: This city is not your location");
+        }
+        Color col = board.cities.at(city).color;
+        if (board.is_cured(col))
+        {
+            board[city] = 0;
+        }
+        else
+        {
+            board[city]--;
+        }
+        
         return *this;
     }
 
@@ -153,4 +199,8 @@ namespace pandemic {
         cards.clear();
     }
     
+    void Player::enter_city(City c)
+    {
+
+    }
 }
